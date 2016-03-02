@@ -1,0 +1,355 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cr3ativ Conference Plugin\n"
+"POT-Creation-Date: 2014-10-08 13:55-0500\n"
+"PO-Revision-Date: 2014-10-08 13:55-0500\n"
+"Last-Translator: Barb Atkinson <barbi.atkinson@gmaill.com>\n"
+"Language-Team: Barb Atkinson <barbi.atkinson@gmaill.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: cr3ativ-conference.php:51
+msgid "Cr3ativ Conference Options"
+msgstr ""
+
+#: cr3ativ-conference.php:52
+msgid "Conference Options"
+msgstr ""
+
+#: cr3ativ-conference.php:87
+msgid "Cr3ativ Conference Settings"
+msgstr ""
+
+#: cr3ativ-conference.php:166
+msgid ""
+"Please set the slug name(s) below for your single pages and session category "
+"pages.  Default urls will be used if nothing is set."
+msgstr ""
+
+#: cr3ativ-conference.php:182
+msgid "Session Single Page Slug Name"
+msgstr ""
+
+#: cr3ativ-conference.php:186
+msgid "Session Category Page Slug Name"
+msgstr ""
+
+#: cr3ativ-conference.php:190
+msgid "Speaker Single Page Slug Name"
+msgstr ""
+
+#: cr3ativ-conference.php:203 templates/single-cr3ativspeaker.php:74
+msgid "Sessions"
+msgstr ""
+
+#: cr3ativ-conference.php:204
+msgid "Session"
+msgstr ""
+
+#: cr3ativ-conference.php:205
+msgid "Conference"
+msgstr ""
+
+#: cr3ativ-conference.php:206 cr3ativ-conference.php:207
+msgid "Add New Session"
+msgstr ""
+
+#: cr3ativ-conference.php:208
+msgid "New Session"
+msgstr ""
+
+#: cr3ativ-conference.php:209
+msgid "Edit Session"
+msgstr ""
+
+#: cr3ativ-conference.php:210
+msgid "View Session"
+msgstr ""
+
+#: cr3ativ-conference.php:211
+msgid "All Sessions"
+msgstr ""
+
+#: cr3ativ-conference.php:212
+msgid "Search Sessions"
+msgstr ""
+
+#: cr3ativ-conference.php:213
+msgid "No sessions found."
+msgstr ""
+
+#: cr3ativ-conference.php:214
+msgid "No sessions found in Trash."
+msgstr ""
+
+#: cr3ativ-conference.php:238 cr3ativ-conference.php:387
+msgid "Date"
+msgstr ""
+
+#: cr3ativ-conference.php:239
+msgid "Choose the date."
+msgstr ""
+
+#: cr3ativ-conference.php:245 cr3ativ-conference.php:388
+msgid "Start Time"
+msgstr ""
+
+#: cr3ativ-conference.php:246
+msgid "Select the start time. 24-hour clock, 01:00-00:30"
+msgstr ""
+
+#: cr3ativ-conference.php:300 cr3ativ-conference.php:389
+msgid "End Time"
+msgstr ""
+
+#: cr3ativ-conference.php:301
+msgid "Select the end time. 24-hour clock, 01:00-00:30"
+msgstr ""
+
+#: cr3ativ-conference.php:355 cr3ativ-conference.php:390
+msgid "Location"
+msgstr ""
+
+#: cr3ativ-conference.php:356
+msgid "Enter location."
+msgstr ""
+
+#: cr3ativ-conference.php:362 cr3ativ-conference.php:523
+#: cr3ativ-conference.php:532
+msgid "Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:363
+msgid "Select the speakers."
+msgstr ""
+
+#: cr3ativ-conference.php:369
+msgid "Highlight Style"
+msgstr ""
+
+#: cr3ativ-conference.php:370
+msgid ""
+"Select this checkbox if you would like to have a highlight this session."
+msgstr ""
+
+#: cr3ativ-conference.php:377
+msgid "Session Information"
+msgstr ""
+
+#: cr3ativ-conference.php:386
+msgid "Session Name"
+msgstr ""
+
+#: cr3ativ-conference.php:391 cr3ativ-conference.php:522
+msgid "Speakers"
+msgstr ""
+
+#: cr3ativ-conference.php:392 cr3ativ-conference.php:612
+msgid "Session Category"
+msgstr ""
+
+#: cr3ativ-conference.php:524
+msgid "Add New"
+msgstr ""
+
+#: cr3ativ-conference.php:525
+msgid "Add New Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:526
+msgid "Edit Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:527
+msgid "New Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:528
+msgid "View Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:529
+msgid "Search Speaker"
+msgstr ""
+
+#: cr3ativ-conference.php:530
+msgid "Nothing found"
+msgstr ""
+
+#: cr3ativ-conference.php:531
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: cr3ativ-conference.php:554
+msgid "Speaker Title"
+msgstr ""
+
+#: cr3ativ-conference.php:555
+msgid "Enter the professional title of this speaker."
+msgstr ""
+
+#: cr3ativ-conference.php:560
+msgid "Speaker Company URL"
+msgstr ""
+
+#: cr3ativ-conference.php:561
+msgid ""
+"Enter the company url, this will appear as a link using the company name "
+"listed below on the speaker single page."
+msgstr ""
+
+#: cr3ativ-conference.php:566
+msgid "Speaker Company Name"
+msgstr ""
+
+#: cr3ativ-conference.php:567
+msgid ""
+"Enter the company name, this will appear under the name on the speaker index "
+"page and will appear as a link - using the url above on the speaker single "
+"page."
+msgstr ""
+
+#: cr3ativ-conference.php:572
+msgid "Social Follow"
+msgstr ""
+
+#: cr3ativ-conference.php:573
+msgid "Add as many social follows as you would like."
+msgstr ""
+
+#: cr3ativ-conference.php:581
+msgid "Image"
+msgstr ""
+
+#: cr3ativ-conference.php:586
+msgid "URL"
+msgstr ""
+
+#: cr3ativ-conference.php:595
+msgid "Speaker Data"
+msgstr ""
+
+#: cr3ativ-conference.php:627
+msgid "Head Shot"
+msgstr ""
+
+#: cr3ativ-conference.php:628
+msgid "Speaker Name"
+msgstr ""
+
+#: cr3ativ-conference.php:629
+msgid "Company"
+msgstr ""
+
+#: cr3ativ-conference.php:630 includes/session-widget.php:23
+#: includes/speaker-widget.php:32
+msgid "Title"
+msgstr ""
+
+#: cr3ativ-conference.php:631
+msgid "Date Added"
+msgstr ""
+
+#: includes/session-widget.php:6
+msgid "Session Loop"
+msgstr ""
+
+#: includes/session-widget.php:27
+msgid "Show speakers for the sessions?"
+msgstr ""
+
+#: includes/session-widget.php:31
+msgid "Show location for the sessions?"
+msgstr ""
+
+#: includes/session-widget.php:116 includes/session-widget.php:125
+#: includes/session-widget.php:135 includes/session-widget.php:207
+#: includes/session-widget.php:242 includes/session-widget.php:260
+#: includes/session-widget.php:332 templates/single-cr3ativspeaker.php:122
+#: templates/single-cr3ativspeaker.php:126
+#: templates/single-cr3ativspeaker.php:161
+#: templates/single-cr3ativspeaker.php:165
+#: templates/taxonomy-cr3ativconfcategory.php:56
+#: templates/taxonomy-cr3ativconfcategory.php:60
+#: templates/taxonomy-cr3ativconfcategory.php:68
+#: templates/taxonomy-cr3ativconfcategory.php:72
+#: templates/taxonomy-cr3ativconfcategory.php:136
+#: templates/taxonomy-cr3ativconfcategory.php:140
+#: templates/taxonomy-cr3ativconfcategory.php:148
+#: templates/taxonomy-cr3ativconfcategory.php:152
+#: templates/template-cr3ativconference.php:77
+#: templates/template-cr3ativconference.php:81
+#: templates/template-cr3ativconference.php:89
+#: templates/template-cr3ativconference.php:93
+#: templates/template-cr3ativconference.php:157
+#: templates/template-cr3ativconference.php:161
+#: templates/template-cr3ativconference.php:169
+#: templates/template-cr3ativconference.php:173
+msgid "Permanent Link to"
+msgstr ""
+
+#: includes/session-widget.php:212 includes/session-widget.php:337
+#: templates/taxonomy-cr3ativconfcategory.php:119
+#: templates/taxonomy-cr3ativconfcategory.php:199
+#: templates/template-cr3ativconference.php:140
+#: templates/template-cr3ativconference.php:220
+msgid "Click for more information on"
+msgstr ""
+
+#: includes/session-widget.php:360 includes/speaker-widget.php:170
+#: templates/single-cr3ativconference.php:85
+#: templates/single-cr3ativspeaker.php:65
+#: templates/template-cr3ativconference.php:28
+#: templates/template-cr3ativspeaker.php:28
+msgid "There are no posts to display. Try using the search."
+msgstr ""
+
+#: includes/speaker-widget.php:7
+msgid "Speaker Loop"
+msgstr ""
+
+#: includes/speaker-widget.php:36
+msgid "Sorting Method"
+msgstr ""
+
+#: includes/speaker-widget.php:38
+msgid "Select One"
+msgstr ""
+
+#: includes/speaker-widget.php:39
+msgid "ASC"
+msgstr ""
+
+#: includes/speaker-widget.php:40
+msgid "DESC"
+msgstr ""
+
+#: includes/speaker-widget.php:44
+msgid "Show speaker headshot?"
+msgstr ""
+
+#: includes/speaker-widget.php:48
+msgid "Show speaker title?"
+msgstr ""
+
+#: includes/speaker-widget.php:52
+msgid "Show speaker company name?"
+msgstr ""
+
+#: includes/speaker-widget.php:56
+msgid "Link company name to company url?"
+msgstr ""
+
+#: includes/speaker-widget.php:60
+msgid "How many to show?"
+msgstr ""

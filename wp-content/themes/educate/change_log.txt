@@ -1,0 +1,24 @@
+Version 1.0
+i)   Theme Submitted for approval
+
+Version 1.0.1
+	1) I have fixed the Customize Site Tagline Text Field and Display Header Text on the Customize Site
+	2) I have fixed the issue of footer logo & social icon hide in check box condiction in the theme options
+	3) i have removed the extra ?> tag from the front page
+	4) i have set the licence and version of owl carousel in readme.txt 
+
+Version 1.0.2
+	1) Add PRO Theme Features tab in theme options.
+
+Version 1.0.3
+	1) Fixed 404 error from "bootstrap.css.map".
+	2) Remove fonts in glyphicons.
+
+Version 1.0.4
+	1) resolve the issue of fontawesome-webfont.woff2?v=4.3.0 
+
+Version 1.0.5
+		1) Fixed Ascii values in theme description.
+
+Version 1.0.6
+		1) Fixed Ascii values in theme description.
