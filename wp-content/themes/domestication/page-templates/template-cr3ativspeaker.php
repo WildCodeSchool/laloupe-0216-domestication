@@ -6,29 +6,11 @@ Template Name: Cr3ativSpeaker
 
 <?php get_header(); ?>
 
-	<h1><?php _e("[:fr]Intervenants[:en]Speakers[:]"); ?></h1>
     <!-- Start of content wrapper -->
     <div id="cr3ativconference_contentwrapper">
 
         <!-- Start of content wrapper -->
         <div class="cr3ativconference_content_wrapper">
-            <?php if(have_posts()) : while(have_posts()) : the_post(); ?>
-
-            <?php 
-            if ( has_post_thumbnail() ) {  ?>
-
-            <?php the_post_thumbnail(''); ?>
-
-            <?php } ?>
-
-            <?php the_content('        '); ?> 
-
-            <?php endwhile; ?> 
-
-            <?php else: ?> 
-            <p><?php _e( 'There are no posts to display. Try using the search.', 'cr3at_conf' ); ?></p> 
-
-            <?php endif; ?>
 
             <div class="cr3ativconference_clearbig"></div>
 
@@ -36,60 +18,58 @@ Template Name: Cr3ativSpeaker
             $temp = $wp_query; 
             $wp_query = null; 
             $wp_query = new WP_Query(); 
-            $wp_query->query('post_type=cr3ativspeaker&posts_per_page=999999'); 
+             $args = array(
+                'post_type'=>'cr3ativspeaker',
+                'meta_query'=>array(
+                    'relation' => 'AND',
+                    array(
+                        'key'=>'speakerisconf',
+                        'value'=>'1',
+                        'compare'=>'='
+                        )
+                    ),
+                'meta_key'=>'speakerlastname',
+                'orderby'=>'meta_value',
+                'order'=>'ASC',
+                'posts_per_page'=>-1
+            );
+           $wp_query->query($args); 
             ?>
 
             <?php while ($wp_query->have_posts()) : $wp_query->the_post();  ?>
 
             
-                <?php
-                $speakertitle = get_post_meta($post->ID, 'speakertitle', $single = true); 
-                $speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true); 
-                $speakerurltext = get_post_meta($post->ID, 'speakerurltext', $single = true);   
-                ?>
+            <?php
+            $lastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
+            $firstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);   
+            $firm = get_post_meta($post->ID, 'speakerfirm', $single = true);   
+            $speakertitle = get_post_meta($post->ID, 'speakertitle', $single = true);   
+            ?>
                         
             <!-- Start of conference wrapper -->
             <div class="cr3ativconference_speaker_wrapper"> 
-<?php
-/*
-                <!-- Start of speaker image -->
-                <div class="cr3ativconference_speaker_image">
-                    <a href="<?php the_permalink (); ?>"><?php the_post_thumbnail(''); ?></a>
 
-                </div><!-- End of speaker image -->
-*/
-?>
-                <!-- Start of speaker name -->
+                 <!-- Start of speaker name -->
                 <div class="cr3ativconference_speaker_name">
-<?php
-	if ($speakerurl != ('')) {
-?>
-                    <a href="<?php echo $speakerurl; ?>" class="speaker-link"><?php the_title (); ?></a>
-<?php
-	}
-else {
-?>
-                    <?php the_title (); ?>
-<?php
-	}
-?>
+                    <?php print(strtoupper($lastname)." $firstname"); ?>
+
                 </div><!-- End of speaker name -->
 
                 <!-- Start of speaker title -->
                 <div class="cr3ativconference_speaker_title">
                     <?php if ($speakertitle != ('')){ ?>
-                    <?php echo stripslashes($speakertitle); ?>
+                    <?php print(stripslashes($speakertitle)); ?>
                     <?php } ?>
 
                 </div><!-- End of speaker title -->
 
-                <!-- Start of speaker title -->
+                <!-- Start of speaker firm -->
                 <div class="cr3ativconference_speaker_company">
-                    <?php if ($speakerurltext != ('')){ ?>
-                    <?php echo stripslashes($speakerurltext); ?>
+                    <?php if ($firm != ('')){ ?>
+                    <?php echo stripslashes($firm); ?>
                     <?php } ?>
 
-                </div><!-- End of speaker title -->
+                </div><!-- End of speaker firm -->
 
             </div><!-- end of conference wrapper -->
 
@@ -106,3 +86,4 @@ else {
     </div><!-- End of content wrapper -->
 
 <?php get_footer(); ?>
+

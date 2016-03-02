@@ -68,17 +68,16 @@ Enlève les rubriques inutilisées des menus
 function wcs_remove_unused_menus()
 {
 	if (current_user_can('editor')) {
-		 //echo '<pre>' . print_r( $GLOBALS[ 'menu' ], TRUE) . '</pre>';
 		  remove_menu_page( 'index.php' );                  //Dashboard
 		  remove_menu_page( 'edit.php' );                   //Posts
 		  remove_menu_page( 'upload.php' );                 //Media
 		  remove_menu_page( 'edit-comments.php' );          //Comments
+		  remove_menu_page( 'edit.php?post_type=page' );    //Pages
 		  remove_menu_page( 'themes.php' );                 //Appearance
 		  remove_menu_page( 'plugins.php' );                //Plugins
 		  remove_menu_page( 'users.php' );                  //Users
 		  remove_menu_page( 'tools.php' );                  //Tools
 		  remove_menu_page( 'options-general.php' );        //Settings
-		  //add_menu_page( 'edit.php?post_type=page' );    //Pages
 	}
 }
 add_action( 'admin_menu', 	'wcs_remove_unused_menus' );

@@ -76,8 +76,3 @@ add_action("init", function() {
 	}
 });
 
-
-function wcs_custom_scripts() {
-    wp_register_script( 'wcs_test_script', get_template_directory_uri( '/js/wcs_test.js') );
-}
-add_action( 'wp_enqueue_scripts', 'wcs_custom_scripts' );
