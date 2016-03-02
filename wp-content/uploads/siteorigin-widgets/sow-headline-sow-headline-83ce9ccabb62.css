@@ -1,0 +1,22 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:500);
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+.so-widget-sow-headline-sow-headline-83ce9ccabb62 #sow-headline-container.sow-headline h2 {
+  font-family: Raleway;
+  font-weight: 500;
+  text-align: left;
+  color: #ffffff;
+  line-height: 1.4;
+}
+.so-widget-sow-headline-sow-headline-83ce9ccabb62 #sow-headline-container.sow-headline h3 {
+  font-family: Raleway;
+  font-weight: 400;
+  text-align: center;
+  color: #818181;
+  line-height: 1.4;
+}
+.so-widget-sow-headline-sow-headline-83ce9ccabb62 #sow-headline-container.sow-headline .decoration {
+  border-top: thin none #EEEEEE;
+  position: relative;
+  height: 1px;
+  margin: 20pxpx 60pxpx;
+}
