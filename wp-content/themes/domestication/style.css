@@ -3012,7 +3012,7 @@ text-align: right;
     color: white;
     width: 40%;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 50px;
     display: block;
     clear: both;
 
@@ -3151,59 +3151,87 @@ text-align: center;
 
 .imageslogos
 {
-display: block;
+/*display: block;*/
 max-width: 250px;
 margin: 0 auto;
 }
 
+/**/
+
+.rowlogo1
+{
+/*display: inline-block;*/
+}
+
+.rowlogo2
+{
+/*display: inline-block;*/
+}
+
+.rowlogo3
+{
+/*display: inline-block;
+*/}
+
+/*
 .imageslogos img 
 {
 margin: 20px;
-}
+}*/
 
 
 .logoCNRS
 {
 max-width: 90px;
-margin: 0 auto;
+/*margin: 10px;*/
+margin-top: 0px;
+padding-top: 0px;
+display: inline-block;
 }
 
 .logoPSL
 {
+
 max-width: 90px;
-margin: 0 auto;
+margin: 10px;
+display: inline-block;
 }
+
 
 .logoMNHN
 {
 max-width: 90px;
-margin: 0 auto;
+margin: 10px;
+display: inline-block;
 }
 
 
 .logobranly
 {
 max-width: 90px;
-margin: 0 auto;
-
+margin: 10px;
+display: inline-block;
 }
 
 .logoEPHE
 {
 max-width: 90px;
-margin: 0 auto;
+margin: 10px;
+display: inline-block;
 }
 
 .logoABERDEEN
 {
 max-width: 90px;
-margin: 0 auto;
+margin: 10px;
+display: inline-block;
 }
 
 
-.imageslogos div
+
+.nomsfooter
 {
-float: left;
+text-align: center;
 }
 
 
@@ -3223,18 +3251,162 @@ margin-top: 50px;
 .contactmail
 {
 margin-top: -50px;
+margin-bottom: -50px;
+}
+
+
+
+.infosdates
+
+{
+margin-bottom: 10px;
+font-size: 20px;
+color: #494949;
+}
+
+.classinfosdata
+{
+padding-bottom: -30px;
+}
+
+
+.panel-row-style-classaccroche.siteorigin-panels-stretch.classaccroche.domestication-stretch.panel-row-style
+{
+margin-top: 0px;
+}
+
+.panel-row-style-classrowmap.siteorigin-panels-stretch.classrowmap.domestication-stretch.panel-row-style
+{
+padding-top: -100px;
+}
+
+.T1
+{
+font-size: 20px;
+margin-bottom: 5px;
+
+}
+.T2
+{
+font-size: 25px;
+margin-bottom: 5px;
+
+}
+.T3
+{
+font-size: 22px;
+margin-bottom: 5px;
+
+}
+.T4
+{
+font-size: 20px;
+margin-bottom: 5px;
+
+}
+.T5
+{
+font-size: 20px;
+margin-bottom: 30px;
+
+}
+
+
+/* Media Queries
+-------------------------------------------------------------- */
+	@media only screen and (min-width: 1900px) {
+		.parallax {
+			background-size: cover;
+		}
+
+
+
+.titre {
+    font-size: 50px;
+   /* padding-top: -30px;  */
+    margin-top: -30px;
+    color: white;
+    display: inline;
+}
+
+.soutitre {
+    font-size: 40px;
+    color: #ffff99;	
+     display: block;
+
+
+}
+
+
+.colloque {
+    font-size: 30px;
+     margin-bottom: 50px;
+     color: white;
+          width: 600px;
+          margin: 0 auto;
+
+}
+.colloque:after {
+	content:' ';
+	text-align: center;
+	display:block;
+	margin:20px auto;
+	border-bottom:3px solid #8BD629;
+	width:200px;
+
+}
+
+.lieu1 {
+
+    font-size: 22px;
+    color: #8BD629;
+    z-index: 20;
+text-align: left;
+width: 400px;
+display: block;
+    /*margin-right: 120px;*/
+    font-weight: bold;
+    float: left;
+    margin-left: 480px;
+}
+
+
+.lieu2 {
+    font-size: 22px;
+    color: #8BD629;
+   /* margin-left: 110px;*/
+    z-index: 21;
+text-align: right;
+    width: 250px;
+    display: block;
+    float: right;
+    font-weight: bold;
+    margin-right: 480px;
+
+
+
+}
+
+.dates {
+    font-size: 21px;
+    color: white;
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: block;
+    clear: both;
+
 }
 
 
 
 
 
-/* Media Queries
--------------------------------------------------------------- */
-	@media only screen and (min-width: 1930px) {
-		.parallax {
-			background-size: cover;
-		}
+
+
+
+
+
 	}
 	/* Smaller than standard 1200 */
 	@media only screen and (max-width: 1199px) {
@@ -3247,6 +3419,11 @@ margin-top: -50px;
 		.masonry-layout .hentry {
 			width: 455px;
 		}
+
+
+
+
+
 	}
 	/* Smaller than standard 980 */
 	@media only screen and (max-width: 991px) {	
@@ -3304,6 +3481,66 @@ margin-top: -50px;
 		.footer-widgets .widget {
 			margin-bottom: 50px;
 		}
+
+
+.titre  {
+			font-size: 33px;
+			display: block;
+			width: auto;
+
+		}
+		.soutitre  {
+		font-size: 25px;
+		display: block;
+		width: auto;
+
+		}
+		.colloque  {
+		font-size: 20px;
+		margin-top: 50px;
+		display: block;
+		width: auto;
+
+
+		}
+		.lieu1  {
+		font-size: 18px;
+		display: block;
+		text-align: center;
+		width: 100%;
+		margin:0;
+
+
+		}
+		.lieu2  {
+		font-size: 18px;
+		display: block;
+		text-align: center;
+		margin:0;
+		width: 100%;
+
+		}
+		.dates  {
+			font-size: 16px;
+			display: block;
+			width: auto;
+		}
+
+		.contain  {
+			display: block;
+			width: auto;
+		}
+
+		.colloque:after {
+			display:block;
+			margin:20px auto 40px auto;
+			border-bottom:2px solid #8BD629;
+			width:100px;
+
+		}
+	}
+
+
 	}
 	@media only screen and (max-width: 1024px) {
 		.slides-container .slide-item,	
@@ -3357,6 +3594,10 @@ margin-top: -50px;
 			background-attachment: scroll;
 			background-position: top center!important;
 		}
+
+
+
+
 	}
 	/* All Mobile Sizes */
 	@media only screen and (max-width: 767px) {
@@ -3444,6 +3685,12 @@ margin-top: -50px;
 		.site-title {
 			font-size: 22px !important;
 		}
+
+
+
+
+
+
 	}
 	/* Mobile Portrait Size */
 	@media only screen and (max-width: 479px) {
@@ -3470,20 +3717,20 @@ margin-top: -50px;
 
 
 		.titre  {
-			font-size: 30px;
+			font-size: 28px;
 			display: block;
 			width: auto;
 
 		}
 		.soutitre  {
-		font-size: 20px;
+		font-size: 18px;
 		display: block;
 		width: auto;
 
 		}
 		.colloque  {
 		font-size: 16px;
-		margin-top: 50px;
+		margin-top: 70px;
 		display: block;
 		width: auto;
 
@@ -3528,7 +3775,68 @@ margin-top: -50px;
 	@media only screen and (max-width: 320px) {
 		.text-slider {
 			margin-bottom: 0;
-		}		
+		}	
+		.titre  {
+			font-size: 25px;
+			display: block;
+			width: auto;
+
+		}
+		.soutitre  {
+		font-size: 15px;
+		margin-top: -15px
+		display: block;
+		width: auto;
+
+		}
+		.colloque  {
+		font-size: 14px;
+		margin-top: 50px;
+		display: block;
+		width: auto;
+
+
+		}
+		.lieu1  {
+		font-size: 14px;
+		display: block;
+		text-align: center;
+		width: 100%;
+		margin:0;
+
+
+		}
+		.lieu2  {
+		font-size: 14px;
+		display: block;
+		text-align: center;
+		margin:0;
+		width: 100%;
+
+		}
+		.dates  {
+			font-size: 14px;
+			display: block;
+			width: auto;
+		}
+
+		.contain  {
+			display: block;
+			width: auto;
+		}
+
+		.colloque:after {
+			display:block;
+			margin:10px auto 40px auto;
+			border-bottom:2px solid #8BD629;
+			width:100px;
+
+		}
+		.panel-row-style-classaccroche.siteorigin-panels-stretch.classaccroche.domestication-stretch.panel-row-style
+{
+margin-top: -40px;
+}
+		
 	}
 
 
