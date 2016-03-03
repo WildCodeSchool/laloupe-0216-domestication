@@ -134,8 +134,8 @@ function cr3_conferencesettings_authorbox_field() {
 function cr3_conferencesettings_admin_menu_setup(){
 	add_submenu_page(
 	 'edit.php?post_type=cr3ativconference',
-	 __('Cr3ativ Conference Options', 'cr3at_conf'),
-	 __('Conference Options', 'cr3at_conf'),
+	 __('Cr3ativ Options', 'cr3at_conf'),
+	 __('Options', 'cr3at_conf'),
 	 'manage_options',
 	 'cr3_conferencesettings',
 	 'cr3_conferencesettings_admin_page_screen'

@@ -42,8 +42,8 @@ Template Name: Cr3ativSpeaker
             <?php
             $lastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
             $firstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);   
-            $firm = get_post_meta($post->ID, 'speakerfirm', $single = true);   
-            $speakertitle = get_post_meta($post->ID, 'speakertitle', $single = true);   
+            $speakeradditionnal = get_post_meta($post->ID, 'speakeradditionnal', $single = true);   
+            $speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true);   
             ?>
                         
             <!-- Start of conference wrapper -->
@@ -55,19 +55,22 @@ Template Name: Cr3ativSpeaker
 
                 </div><!-- End of speaker name -->
 
-                <!-- Start of speaker title -->
-                <div class="cr3ativconference_speaker_title">
-                    <?php if ($speakertitle != ('')){ ?>
-                    <?php print(stripslashes($speakertitle)); ?>
-                    <?php } ?>
-
-                </div><!-- End of speaker title -->
-
-                <!-- Start of speaker firm -->
+                <!-- Start of speaker additional info -->
                 <div class="cr3ativconference_speaker_company">
-                    <?php if ($firm != ('')){ ?>
-                    <?php echo stripslashes($firm); ?>
+                    <?php if ($speakeradditionnal != ('')){ ?>
+                    <?php echo stripslashes($speakeradditionnal); ?>
                     <?php } ?>
+
+                </div><!-- End of speaker firm -->
+
+                <!-- Start of speaker Web site -->
+                <div class="cr3ativconference_speaker_company">
+                    <?php 
+                    if ($speakerurl != ('')){
+                        $speakerurl = stripslashes($speakerurl);
+                        print("<a href='$speakerurl'>$speakerurl</a>");
+                    } 
+                    ?>
 
                 </div><!-- End of speaker firm -->
 

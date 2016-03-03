@@ -1,0 +1,14 @@
+{"vendor":{"plugins/cr3ativ-conference":"1.0"},
+"admin-config": {
+"post": {
+	"pages": { "post-new.php":"post_type=cr3ativspeaker" },
+	"forms":{
+		"post":{
+			"fields":{
+				"speakeradditionnal":{}
+			}
+		}
+	}
+}
+}
+}

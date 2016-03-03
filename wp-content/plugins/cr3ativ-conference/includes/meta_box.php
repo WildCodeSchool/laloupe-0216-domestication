@@ -235,7 +235,7 @@ function cr3ativconference_meta_box_field( $field, $meta = null, $repeatable = n
 							<br clear="all" />' . $desc;
 		break;
 		// pdf list
-					case 'pdf_list':  
+		case 'pdf_list':  
 			$items = get_posts( array (  
 				'post_type' => 'attachment',
   				'post_mime_type' =>'application/pdf',

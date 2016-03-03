@@ -2,26 +2,39 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////      Speaker post type      /////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+//==================================================
+// Masque le titre dans l'éditeur
+//==================================================
+add_action('admin_head', 'wcs_adapt_css_admin');
+function wcs_adapt_css_admin() {
+	global $typenow; 
+	if ($typenow=="cr3ativspeaker") {
+		print('<style>#post-body-content { display:none; }</style>');
+	}
+}
+
 add_action('init', 'create_cr3ativspeaker');
 
 function create_cr3ativspeaker() {
+
  $options = get_option('cr3_conferencesettings_options');
  $authorbox3 = (isset($options['authorbox_template3'])) ? $options['authorbox_template3'] : '';
  $authorbox3 = strip_tags($authorbox3); //sanitise output	
 	
-	$labels = array(
-		'name' 			=> __('Participants', 'post type general name', 'cr3at_conf'),
-		'singular_name' => __('Participant', 'post type singular name', 'cr3at_conf'),
-		'add_new' 		=> __('Ajout d\'un participant', 'speaker', 'cr3at_conf'),
-		'add_new_item' 	=> __('Ajout d\'un participant', 'cr3at_conf'),
-		'edit_item' 	=> __('Editer', 'cr3at_conf'),
-		'new_item' 		=> __('Nouveau participant', 'cr3at_conf'),
-		'view_item' 	=> __('Voir', 'cr3at_conf'),
-		'search_items' 	=> __('Rechercher', 'cr3at_conf'),
-		'not_found' 			=>  __('Aucun participant n\'a été trouvé.', 'cr3at_conf'),
-		'not_found_in_trash' 	=> __('Aucun participant n\'a été trouvé dans la corbeille', 'cr3at_conf'),
-		'parent_item_colon' 	=> __('Participant', 'cr3at_conf'),
-	);
+		$labels = array(
+			'name' 			=> __('Personnes', 'post type general name', 'cr3at_conf'),
+			'singular_name' => __('Personne', 'post type singular name', 'cr3at_conf'),
+			'add_new' 		=> __('Ajout d\'une personne', 'speaker', 'cr3at_conf'),
+			'add_new_item' 	=> __('Ajout d\'une personne', 'cr3at_conf'),
+			'edit_item' 	=> __('Editer', 'cr3at_conf'),
+			'new_item' 		=> __('Nouvelle personne', 'cr3at_conf'),
+			'view_item' 	=> __('Voir', 'cr3at_conf'),
+			'search_items' 	=> __('Rechercher', 'cr3at_conf'),
+			'not_found' 			=>  __('Personne n\'a été trouvée.', 'cr3at_conf'),
+			'not_found_in_trash' 	=> __('Personne n\'a été trouvée dans la corbeille', 'cr3at_conf'),
+			'parent_item_colon' 	=> __('Personne', 'cr3at_conf'),
+		);
 	
     	$cr3ativspeaker_args = array(
         	'labels' => $labels,
@@ -35,7 +48,7 @@ function create_cr3ativspeaker() {
 			'hierarchical' => false,
 			'menu_position' => null,
             'show_in_menu' => 'edit.php?post_type=cr3ativconference',
-			'supports' => array('')//'title', 'thumbnail')
+			'supports' => array('title')
         );
     	register_post_type('cr3ativspeaker',$cr3ativspeaker_args);
 	}
@@ -59,21 +72,35 @@ $cr3ativspeaker_fields = array(
 		'id'	=> 'speakerfirstname',
 		'type'	=> 'text'
 	),
+	/*
     array(
-		'label'	=> __('Organisme, société', 'cr3at_conf'),
-		'desc'	=> __('Nom de l\'organisation, la société ou l\'établissement du participant', 'cr3at_conf'),
+		'label'	=> __('Organisme, établissement', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - Nom de l\'organisation ou l\'établissement du participant', 'cr3at_conf'),
 		'id'	=> 'speakerfirm',
 		'type'	=> 'text'
 	),
 	array(
-		'label'	=> __('Titre', 'cr3at_conf'),
-		'desc'	=> __('Entrer le titre professionnel.', 'cr3at_conf'),
-		'id'	=> 'speakertitle',
+		'label'	=> __('Ville, Pays', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - Entrer la ville et/ou le pays de l\'organisme.', 'cr3at_conf'),
+		'id'	=> 'speakercitycountry',
 		'type'	=> 'text'
 	),
-    array(
+	array(
+		'label'	=> __('Adresse postale complémentaire', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - Entrer l\'adresse de l\'établissement.', 'cr3at_conf'),
+		'id'	=> 'speakeraddress',
+		'type'	=> 'text'
+	),
+   */
+	array(
+		'label'	=> __('Infos complémentaires', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - Entrer des informations supplémentaire. Exemple : établissement, publications, ville, pays...', 'cr3at_conf'),
+		'id'	=> 'speakeradditionnal',
+		'type'	=> 'textarea'
+	),
+   array(
 		'label'	=> __('Site web', 'cr3at_conf'),
-		'desc'	=> __('URL page web société ou professionnelle', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - URL site web participant ou organisme', 'cr3at_conf'),
 		'id'	=> 'speakerurl',
 		'type'	=> 'text'
 	)
@@ -104,7 +131,7 @@ $cr3ativspeaker_fields = array(
 */
 );
 
-$cr3ativspeaker_box = new cr3ativconference_add_meta_box( 'cr3ativconference_box', __('Participant', 'cr3at_conf'), $cr3ativspeaker_fields, 'cr3ativspeaker', true );
+$cr3ativspeaker_box = new cr3ativconference_add_meta_box( 'cr3ativconference_box', __('Personne', 'cr3at_conf'), $cr3ativspeaker_fields, 'cr3ativspeaker', true );
 
 add_filter( 'manage_edit-cr3ativspeaker_columns', 'my_edit_cr3ativspeaker_columns' ) ;
 
@@ -115,8 +142,8 @@ function my_edit_cr3ativspeaker_columns( $columns ) {
 		/*'title' => __( 'Nom et prénom', 'cr3at_conf' ),*/
         /*'speakerimage' => __( 'Head Shot' , 'cr3at_conf'),*/
 		'speakername' => __( 'Identité', 'cr3at_conf' ),
-        'speakercompanyname' => __( 'Organisme/Société' , 'cr3at_conf'),
-        'speakercompanytitle' => __( 'Titre' , 'cr3at_conf'),
+        /*'speakercompanyname' => __( 'Organisme/Société' , 'cr3at_conf'),
+        'speakercitycountry' => __( 'Ville/Pays' , 'cr3at_conf'),*/
         'speakerurl' => __( 'Site Web' , 'cr3at_conf'),
         'speakerisconf' => __( 'Intervenant ?' , 'cr3at_conf')        /*'date' => __( 'Date Added' , 'cr3at_conf')*/
 	);
@@ -131,8 +158,10 @@ function my_manage_cr3ativspeaker_columns( $column, $post_id ) {
 	$speakerisconf = get_post_meta($post->ID, 'speakerisconf', $single = true);
     $speakerlastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
     $speakerfirstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);
+/*
 	$speakerfirm = get_post_meta($post->ID, 'speakerfirm', $single = true); 
-    $speakertitle = get_post_meta($post->ID, 'speakertitle', $single = true);
+    $speakercitycountry = get_post_meta($post->ID, 'speakercitycountry', $single = true);
+*/    
 	$speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true); 
 	
 	switch( $column ) {
@@ -156,17 +185,17 @@ function my_manage_cr3ativspeaker_columns( $column, $post_id ) {
 				printf( "oui" );  
 			}
 			break;
-        
+/*        
 		case 'speakercompanyname' :
 
 			printf( $speakerfirm ); 
 			break;
         
-		case 'speakercompanytitle' :
+		case 'speakercitycountry' :
 
-             printf( __($speakertitle) ); 
+             printf( __($speakercitycountry) ); 
 			break;
-
+*/
 		case 'speakerurl' :
 
             printf( "<a href='$speakerurl'>$speakerurl</a><br/>" ); 
@@ -202,3 +231,12 @@ function my_sort_cr3ativspeaker( $vars ) {
 	}
 	return $vars;
 }
+
+function add_js_validation(){    
+  wp_enqueue_script(
+  	'my_validate', 
+  	plugin_dir_url(__FILE__).'includes/js/wcs_required_fields.js'
+  	);
+}
+add_action('admin_enqueue_scripts', 'add_js_validation');   
+
