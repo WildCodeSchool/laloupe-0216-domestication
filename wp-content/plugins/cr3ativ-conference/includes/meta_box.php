@@ -115,11 +115,11 @@ function cr3ativconference_meta_box_field( $field, $meta = null, $repeatable = n
                   
                     echo '<select data-placeholder="Select One" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '"' , $type == 'post_chosen_speaker' ? ' class="chosen"' : '', 'multiple="multiple">';
                    
-                    $posts = get_posts( array( 'post_type' => 'cr3ativspeaker', 'posts_per_page' => -1, 'orderby' => 'name', 'order' => 'ASC' ) );
+                    $posts = get_posts( array( 'post_type' => 'cr3ativspeaker', 'posts_per_page' => -1, 'orderby' => 'speakerlastname', 'order' => 'ASC' ) );
                    
                     foreach ( $posts as $item )
                     
-                        echo '<option value="' . $item->ID . '"' . selected( is_array( $meta ) && in_array( $item->ID, $meta ), true, false ) . '>' . $item->post_title . '</option>';
+                        echo '<option value="' . $item->ID . '"' . selected( is_array( $meta ) && in_array( $item->ID, $meta ), true, false ) . '>' . strtoupper($item->speakerlastname) . ' ' . $item->speakerfirstname . '</option>';
                    
                    
                     echo '</select><br />' . $desc;
@@ -210,7 +210,7 @@ function cr3ativconference_meta_box_field( $field, $meta = null, $repeatable = n
 		break;
 		// date
 		case 'date':
-			echo '<input type="text" class="datepicker" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="', '' !== $meta ? date( 'm\/d\/Y', $meta ) : $meta, '" size="30" />
+			echo '<input type="text" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="', '' !== $meta ? date( 'd\/m\/Y', $meta ) : $meta, '" size="30" />
 					<br />' . $desc;
 		break;
 		// slider
@@ -473,8 +473,8 @@ class cr3ativconference_Add_Meta_Box {
 		if ( in_array( $pagenow, array( 'post-new.php', 'post.php' ) ) && in_array( get_post_type(), $this->page ) ) {
 			// js
 			$deps = array( 'jquery' );
-			if ( cr3ativconference_meta_box_find_field_type( 'date', $this->fields ) )
-				$deps[] = 'jquery-ui-datepicker';
+			//if ( cr3ativconference_meta_box_find_field_type( 'date', $this->fields ) )
+			//	$deps[] = 'jquery-ui-datepicker';
 			if ( cr3ativconference_meta_box_find_field_type( 'slider', $this->fields ) )
 				$deps[] = 'jquery-ui-slider';
 			if ( cr3ativconference_meta_box_find_field_type( 'color', $this->fields ) )
@@ -524,9 +524,9 @@ class cr3ativconference_Add_Meta_Box {
 				switch( $field['type'] ) {
 					// date
 					// date
-					case 'date' :
-						echo '$("#' . $field['id'] . '").datepicker();';
-					break;
+					//case 'date' :
+					//	echo '$("#' . $field['id'] . '").datepicker();';
+					//break;
 					// slider
 					case 'slider' :
 					$value = get_post_meta( get_the_ID(), $field['id'], true );
@@ -640,8 +640,10 @@ class cr3ativconference_Add_Meta_Box {
 					else
 						$new = cr3ativconference_meta_box_sanitize( $new, $sanitizer );
 					update_post_meta( $post_id, $field['id'], $new );
+
 					if ($field['type'] == 'date') {
-					update_post_meta( $post_id, $field['id'], strtotime($new) );
+						$date_tmp = DateTime::createFromFormat('d/m/Y', $new);
+						update_post_meta( $post_id, $field['id'], strtotime($date_tmp->format('Y-m-d')) ); //strtotime($new) );
 					}
 				}
 			}

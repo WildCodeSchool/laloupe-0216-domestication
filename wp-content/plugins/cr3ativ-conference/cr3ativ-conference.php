@@ -42,7 +42,6 @@ include_once( 'includes/meta_box.php' );
 load_plugin_textdomain('cr3at_conf', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 include_once( dirname(__FILE__) . "/admin-setup.php" );
-include_once( dirname(__FILE__) . "/admin-menu.php" );
 include_once( dirname(__FILE__) . "/func-sessions.php" );
 include_once( dirname(__FILE__) . "/func-speakers.php" );
 include_once( dirname(__FILE__) . "/func-categories.php" );
