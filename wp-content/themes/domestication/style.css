@@ -3117,7 +3117,12 @@ margin-top: -100px;
 
 .boutonprogramme
 {
-	margin-top: 70px;
+	margin-top: 60px;
+}
+
+.boutonprogrammeENG
+{
+	margin-top: 0px;
 }
 
 .comite1
@@ -3990,4 +3995,3 @@ text-align: right;
 .speaker-link {
 	color : #D65050;
 }
-
