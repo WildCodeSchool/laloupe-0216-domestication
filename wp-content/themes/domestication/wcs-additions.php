@@ -1,5 +1,8 @@
 <?php
 /**
+ * NOTE 03/03/2016 :
+ * ---> NE FONCTIONNE PLUS !
+ *
  * Ce fichier permet d'appliquer des changements sur le thème sur :
  * - les liens vers les images utilisateurs (url des images restituées telles quel au moment du chargement
  * des images sur le site, ce qui pose problème lors du changement d'url dans les settings)
@@ -46,6 +49,8 @@ if ( ! function_exists( 'wcs_get_correct_image_uri' ) ) :
             // si l'image est dans le répertoire d'upload
             // on renvoit la bonne url
             $upload_dirs    = wp_upload_dir();
+            $uri = $upload_dirs['url']. '/'.$fname;
+
             if (is_file( $upload_dirs['path']. '/'. $fname ) ) {
                 $uri = $upload_dirs['url']. '/'.$fname;
             }

@@ -19,7 +19,7 @@ add_action('admin_head', 'wcs_adapt_css_admin');
 function wcs_adapt_css_admin() {
 	global $typenow; 
 	if ($typenow=="cr3ativspeaker") {
-		print('<style>#post-body-content { display:none; }</style>');
+		print('<style>#post-body-content, .search-box { display:none; }</style>');
 	}
 }
 
@@ -100,8 +100,8 @@ $cr3ativspeaker_fields = array(
 		'type'	=> 'textarea'
 	),
    array(
-		'label'	=> __('Site web', 'cr3at_conf'),
-		'desc'	=> __('(facultatif) - URL site web participant ou organisme', 'cr3at_conf'),
+		'label'	=> __('Site(s) web', 'cr3at_conf'),
+		'desc'	=> __('(facultatif) - URL site(s) web(s) participant ou organisme. Si plusieurs sites, les séparer avec un ";".', 'cr3at_conf'),
 		'id'	=> 'speakerurl',
 		'type'	=> 'text'
 	)

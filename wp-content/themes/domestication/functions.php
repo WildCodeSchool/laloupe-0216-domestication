@@ -4,7 +4,7 @@
  *
  * @package domestication
  */
-include_once( dirname(__FILE__)."/wcs-additions.php" );
+//include_once( dirname(__FILE__)."/wcs-additions.php" );
 
 if ( ! function_exists( 'domestication_setup' ) ) :
 /**

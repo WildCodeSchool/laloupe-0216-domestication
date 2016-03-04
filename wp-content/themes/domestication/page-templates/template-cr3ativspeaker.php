@@ -33,17 +33,23 @@ Template Name: Cr3ativSpeaker
                 'order'=>'ASC',
                 'posts_per_page'=>-1
             );
-           $wp_query->query($args); 
-            ?>
-
-            <?php while ($wp_query->have_posts()) : $wp_query->the_post();  ?>
-
+            $wp_query->query($args); 
             
-            <?php
-            $lastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
-            $firstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);   
-            $speakeradditionnal = get_post_meta($post->ID, 'speakeradditionnal', $single = true);   
-            $speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true);   
+            while ($wp_query->have_posts()) : 
+                $wp_query->the_post();
+    
+                $lastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
+                $firstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);   
+                $speakeradditionnal = get_post_meta($post->ID, 'speakeradditionnal', $single = true);   
+            
+                // speakerul : contrairement à ce que le nom indique, il peut y en avoir plusieurs séparés par un ";"
+                $speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true);   
+     
+                $speakerurl_array = array();
+                if ($speakerurl != ('')){
+                   $speakerurl_array = explode(";", $speakerurl);
+                }
+            
             ?>
                         
             <!-- Start of conference wrapper -->
@@ -63,14 +69,14 @@ Template Name: Cr3ativSpeaker
 
                 </div><!-- End of speaker firm -->
 
-                <!-- Start of speaker Web site -->
+                <!-- Start of speaker Web sites -->
                 <div class="cr3ativconference_speaker_company">
-                    <?php 
-                    if ($speakerurl != ('')){
-                        $speakerurl = stripslashes($speakerurl);
-                        print("<a href='$speakerurl'>$speakerurl</a>");
-                    } 
-                    ?>
+                <?php 
+                    foreach ($speakerurl_array as $url) {
+                        $url = stripslashes($url);
+                        print("<a href='$url'>$url</a><br />");
+                    }
+                ?>
 
                 </div><!-- End of speaker firm -->
 

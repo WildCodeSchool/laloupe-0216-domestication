@@ -50,7 +50,7 @@ add_action('init', 'create_cr3ativconference');
 $cr3ativconference_fields = array(
 	array(
         'label' => __('Date', 'cr3at_conf'),
-        'desc' 	=> __('Choisir la date de la communication.', 'cr3at_conf'),
+        'desc' 	=> __('Choisir la date de la communication (format : Jour/Mois/Année).', 'cr3at_conf'),
         'id' 	=> 'cr3ativconf_date',
         'type' 	=> 'date',
         'std' 	=> ''

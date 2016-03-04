@@ -113,9 +113,15 @@ function cr3ativconference_meta_box_field( $field, $meta = null, $repeatable = n
          
         case 'post_chosen_speaker':
                   
-                    echo '<select data-placeholder="Select One" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '"' , $type == 'post_chosen_speaker' ? ' class="chosen"' : '', 'multiple="multiple">';
+                    echo '<select data-placeholder="Select One" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '"' , $type == 'post_chosen_speaker' ? ' class="chosen"' : '', 'multiple="multiple" style="height:200px">';
                    
-                    $posts = get_posts( array( 'post_type' => 'cr3ativspeaker', 'posts_per_page' => -1, 'orderby' => 'speakerlastname', 'order' => 'ASC' ) );
+                    $posts = get_posts( 
+                    			array( 
+                    				'post_type' => 'cr3ativspeaker', 
+                    				'posts_per_page' => -1, 
+                    				'meta_key' => 'speakerlastname',
+                    				'orderby' => 'meta_value', 
+                    				'order' => 'ASC' ) );
                    
                     foreach ( $posts as $item )
                     
