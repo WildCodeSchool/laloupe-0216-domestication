@@ -69,11 +69,18 @@ $cr3ativconference_fields = array(
         'type' 	=> 'text',
         'std' 	=> ""
     ),
-	array(
-        'label' => __('Intervenants et co-auteurs', 'cr3at_conf'),
-        'desc' 	=> __('Sélectionnez les intervenants, les auteurs, les co-auteurs.', 'cr3at_conf'),
-        'id' 	=> 'cr3ativconf_persons',
+    array(
+        'label' => __('Intervenants', 'cr3at_conf'),
+        'desc' 	=> __('Sélectionnez les intervenants. Pour en sélectionner plusieurs, maintenir la touche CTRL', 'cr3at_conf'),
+        'id' 	=> 'cr3ativconf_speakers',
         'type' 	=> 'post_chosen_speaker',
+        'std' 	=> ""
+    ),
+	array(
+        'label' => __('Co-auteurs', 'cr3at_conf'),
+        'desc' 	=> __('Sélectionnez les auteurs, les co-auteurs. Pour en sélectionner plusieurs, maintenir la touche CTRL', 'cr3at_conf'),
+        'id' 	=> 'cr3ativconf_coauthors',
+        'type' 	=> 'post_chosen_coauthor',
         'std' 	=> ""
     )
 );
@@ -119,7 +126,8 @@ function my_manage_cr3ativconference_columns( $column, $post_id ) {
     $meetingdate = get_post_meta($post->ID, 'cr3ativconf_date', $single = true);
     $datestart = get_post_meta($post->ID, 'cr3ativconf_starttime', $single = true); 
     $dateend = get_post_meta($post->ID, 'cr3ativconf_endtime', $single = true); 
-    $speakers = get_post_meta($post->ID, 'cr3ativconf_persons', $single = true);
+    $speakers = get_post_meta($post->ID, 'cr3ativconf_speakers', $single = true);
+    $coauthors = get_post_meta($post->ID, 'cr3ativconf_coauthors', $single = true);
    	$hours = $datestart.' - '.$dateend;
 
 	switch( $column ) {
@@ -138,11 +146,16 @@ function my_manage_cr3ativconference_columns( $column, $post_id ) {
 
 		case 'speakers' :
 
-			 if ( $speakers ) { 
+			 if ( is_array($speakers) ) { 
 	        	foreach ( $speakers as $speaker ) {    	
 	        		$speaker = get_post($speaker);
-	        		//echo '<a href="'. admin_url() .'edit.php?post_type=cr3ativspeaker&id='.$speaker->ID.'">'. $speaker->speakerlastname .' '. $speaker->speakerfirstname .'</a><br/>';
-	        		echo $speaker->speakerlastname .' '. $speaker->speakerfirstname .'<br/>'; 
+	        		echo "<b>".$speaker->speakerlastname .' '. $speaker->speakerfirstname .'</b><br/>'; 
+				}
+			}
+			 if ( is_array($coauthors) ) { 
+	        	foreach ( $coauthors as $coauthor ) {    	
+	        		$coauthor = get_post($coauthor);
+	        		echo $coauthor->speakerlastname .' '. $coauthor->speakerfirstname .'<br/>'; 
 				}
 			}
 			break;

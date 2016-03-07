@@ -3,6 +3,10 @@
 
 
 /*---------------------Conference Style-------------------------- */
+h1 {
+    text-align:center;
+}
+
 .cr3ativconference_clear {
 	clear: both;
 	display: block;
@@ -20,17 +24,29 @@
 	width:100%;
 	}
 #cr3ativconference_contentwrapper {
+    display: block;
 	width:100%;
-    margin: 0 auto 40px;
+    /*margin: 0 auto;*/
+    position: relative;
 	}
 .cr3ativconference_content_wrapper {
-	width:100%;
+    display: inline-block;
+    position: relative;
+	width:auto;
+    border: 10px solid blue;
+    margin: 0 auto;
 	}	
 .cr3ativconference_speaker_wrapper {
-    margin-right:3%;
+    position: relative;
+    right:0;
+    margin-left:3%;
     margin-bottom: 5%;
-    width:22.75%;
+    width:29.0%; /*26.75%;*/
+    padding:5%;
+    height:300px;
     float:left;
+    border:1px dotted rgb(194,194,194);
+    background:#EEEEEE;
 }
 .cr3ativconference_blog_wrapper .speaker_list {
     display: inline-block;
@@ -43,9 +59,11 @@ p.sessioncats {
     font-size: 0.8em;
     margin-top: 20px;
 }
+/*
 .cr3ativconference_speaker_wrapper:nth-of-type(4n+5) {  
     margin-right: 0;
 }
+*/
 .cr3ativconference_speaker_name, .cr3ativconference_speaker_title, .cr3ativconference_speaker_company {
     text-align:center;
 }
@@ -61,6 +79,10 @@ p.sessioncats {
     font-size: 1.1em;
     margin-top: 5px;
 }
+.cr3ativconference_speaker_company a {
+    color:#e85149;
+}
+
 h1.conference_date {
     font-size: 1.9em;
     margin-bottom: 30px;
@@ -260,3 +282,172 @@ h6.session {
 }
 
 /*  END OF MEDIA QUERIES */
+
+
+/*---------------------------------------------------------
+WCS : page "Programme"
+---------------------------------------------------------*/
+.day-1 {
+    color:#cc9345;
+}
+.day-2 {
+    color:#e85149;
+}
+.day-3 {
+    color:#cc9345;
+}
+
+.wcs-day {
+   background-color:rgb(194,194,194);
+   margin:50px 0;
+   padding:10px;
+   text-align: center;
+}
+
+.wcs-day h6 {
+    color:white;
+}
+
+.wcs-session {
+    margin-bottom:50px;
+    text-align: center;
+}
+.wcs-session h5 {
+    font-size:24px;
+    font-style: bold;
+    border-bottom:1px dotted rgb(120,120,120);
+    padding:20px;
+    padding-left:0;
+}
+.wcs-session h6 {
+    font-size:16px;
+    font-family: "Source Sans Pro";
+}
+
+.wcs-comm h6 {
+    margin-bottom:0;
+    padding-bottom:10px;
+}
+.wcs-hours {
+    display:inline-block;    
+    width:120px;
+    text-align: top;
+    float:left;
+}
+
+.wcs-comm-title {
+    display: inline-block;
+    width:80%;
+    padding:20px;
+    padding-top:0px;
+    border-left-width:1px;
+    border-left-style:dotted;
+}
+.day-1 .wcs-comm-title {
+    border-left-color:#cc9345;
+}
+.day-2 .wcs-comm-title {
+    border-color:#e85149;
+}
+.day-3 .wcs-comm-title {
+    border-color:#cc9345;
+}
+
+.wcs-comm-title {
+    color :rgb(100,100,100);
+}
+
+.wcs-pers {
+    font-family: "Source Sans Pro";
+    font-size:14px;
+    width:60%;
+    margin-top:0px;
+    margin-left:140px;
+    margin-bottom:50px;
+    color :rgb(100,100,100);
+}
+
+/*---------------------------------------------------------
+WCS : page "Programme" -> Modal
+---------------------------------------------------------*/
+.wcs-modal {
+    display:block;
+    margin:0;
+    padding:0;
+}
+.wcs-content {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    display:none;    
+    z-index:50;
+    background:rgba(0,0,0,0.4);
+}
+.wcs-content .wcs-content-text {
+    overflow: auto;
+    margin:10px auto;
+    padding:5%;
+    max-width:70%;
+    min-width:320px;
+    height:95vh;
+    background: white;
+    border:1px solid rgb(194,194,194);
+}
+
+.wcs-content .wcs-content-text h4 {
+    margin-bottom:10%;
+}
+
+.wcs-bt-open {
+    padding:0px;
+    border:0px;
+    background: white;
+    text-align:left;
+    font-size:inherit;
+}
+.wcs-bt-close {
+    margin:50px auto;
+    display:block;
+    width:150px;
+    border-width:0px;
+    border:1px solid rgb(100,100,100);
+    padding:10px 20px;
+    background: white;
+    color:rgb(100,100,100);
+}
+
+
+@media only screen and (max-width: 800px) {	
+	/* programme */
+	.wcs-hours {
+		display:block;    
+		width:100%;
+		text-align: top;
+		float:none;
+		padding:20px;
+	}
+	.wcs-comm-title {
+		display: block;
+		width:100%;
+		padding:20px;
+		padding-top:0px;
+		border-left-width:0px;
+		margin-bottom:0px;
+	}
+	.wcs-pers {
+		margin-bottom:0px;
+		width:100%;
+		margin-left:0px;
+		margin-bottom:30px;
+		padding:0px 20px;
+	}
+
+	/* modal */
+	.wcs-content .wcs-content-text {
+		max-width:100%;
+	}
+}
+
+

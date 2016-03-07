@@ -115,6 +115,40 @@ function cr3ativconference_meta_box_field( $field, $meta = null, $repeatable = n
                   
                     echo '<select data-placeholder="Select One" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '"' , $type == 'post_chosen_speaker' ? ' class="chosen"' : '', 'multiple="multiple" style="height:200px">';
                    
+                    echo '<option value="0"' . selected( is_array( $meta ) && in_array( $item->ID, $meta ), true, false ) . '> -- ne rien sélectionner -- </option>';
+
+                    $posts = get_posts( 
+                    			array( 
+                    				'post_type' => 'cr3ativspeaker', 
+					                'meta_query'=>array(
+					                    'relation' => 'AND',
+					                    array(
+					                        'key'=>'speakerisconf',
+					                        'value'=>'1',
+					                        'compare'=>'='
+					                        )
+					                    ),
+                    				'meta_key' => 'speakerlastname',
+                    				'orderby' => 'meta_value', 
+                    				'order' => 'ASC',
+                    				'posts_per_page' => -1
+                    				) );
+                   
+                    foreach ( $posts as $item )
+                    
+                        echo '<option value="' . $item->ID . '"' . selected( is_array( $meta ) && in_array( $item->ID, $meta ), true, false ) . '>' . strtoupper($item->speakerlastname) . ' ' . $item->speakerfirstname . '</option>';
+                   
+                   
+                    echo '</select><br />' . $desc;
+                break;
+                
+                
+        case 'post_chosen_coauthor':
+                  
+                    echo '<select data-placeholder="Select One" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '"' , $type == 'post_chosen_speaker' ? ' class="chosen"' : '', 'multiple="multiple" style="height:200px">';
+                   
+                    echo '<option value="0"' . selected( is_array( $meta ) && in_array( $item->ID, $meta ), true, false ) . '> -- ne rien sélectionner -- </option>';
+
                     $posts = get_posts( 
                     			array( 
                     				'post_type' => 'cr3ativspeaker', 
