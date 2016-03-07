@@ -5,241 +5,268 @@ Template Name: Cr3ativ-Conference
 Page retravaillée pour WCS.
 
 */  
+
+
+//========================================================== 
+// Ajoute un script en pied de page
+//========================================================== 
+add_action('wp_footer', 'wcs_js_modal');
+
+function wcs_js_modal() {
+    wp_enqueue_script( 'wcs_js_modal', get_template_directory_uri() . '/js/wcs_js_modal.js', array("jquery") );
+}
+
+
+//========================================================== 
+// Inclut l'entête de la page
+//========================================================== 
+get_header();
 ?>
 
-<?php get_header(); ?>
-
 <!-- Start of content wrapper -->
-<div id="cr3ativconference_contentwrapper">
-    <div class="conf-wrapper OLD_cr3ativconference_content_wrapper">
+<div> <!--id="cr3ativconference_contentwrapper"> -->
+    <div class="wcs-conf"> <!--class="conf-wrapper">-->
 
         <h1><?php _e("[:fr]Programme[:en]Schedule[:]");?></h1>
-<?php
-        // Récupère toutes les "communications"
+        
+        <?php
+/*------------------------------------------
+DEBUT
 
+Récupération et traitement des données
+- Journées
+- pauses/intro ou autres
+- communications
+- intervenants et co-auteurs
+------------------------------------------*/
+
+        // Récupère toutes "communications" triées par jour et heure.
         add_filter('posts_orderby','cr3ativoderby2');
-        $wp_query = new WP_Query(array(
-                        'post_type'         => 'cr3ativconference',
-                        'posts_per_page'    => -1,
-                        'order'             => 'ASC',
-                        'meta_key'          => 'cr3ativconf_date',
-                        'meta_query'        => array(
-                                                    array(
-                                                    'key' => 'cr3ativconf_date',
-                                                    ),
-                                                    array(
-                                                    'key' => 'cr3ativconf_starttime',
-                                                    ),
-                                                ),
-                            )); 
+        
+        $wp_query = new WP_Query(
+                            array(
+                            'post_type'         => 'cr3ativconference',
+                            'posts_per_page'    => -1,
+                            'order'             => 'ASC',
+                            'meta_key'          => 'cr3ativconf_date',
+                            'meta_query'        => array(
+                                    array(
+                                      'key' => 'cr3ativconf_date',
+                                    ),
+                                    array(
+                                      'key' => 'cr3ativconf_starttime',
+                                    )
+                                )
+                            )
+                        ); 
+        
         remove_filter('posts_orderby','cr3ativoderby2');
-          
-        $sessiondate = '';
-        $is_same_date = true;
-        $is_same_session = true;
-        $day_name = '';
-        $is_break = false;
-        $has_desc = true;
+        
+        $is_same_day        = false;
+        $day_date           = '';
+        $day_name           = '';
+        $day_desc           = '';
+        $day_css_class      = '';
+        $is_same_session    = true;
+        $session_date       = '';
+        $session_name       = '';
+        $session_desc       = '';
+        $comm_time          = '';
+        $person_ids         = array();
+        $html_list_pers     = '';
 
+        while (have_posts()) : 
+            the_post();
 
-        while (have_posts()) : the_post();
-            $post_id = $post->ID;
+            // -------------------------------------------------------------------------------
+            // récupère les données de la communication
+            // -------------------------------------------------------------------------------
+            $meetingdate = $post->cr3ativconf_date;
+            $starttime   = $post->cr3ativconf_starttime;
+            $endtime     = $post->cr3ativconf_endtime;
+            $person_ids  = $post->cr3ativconf_speakers;
+            if ( is_array($post->cr3ativconf_coauthors) ) {
+                $person_ids = array_merge( $person_ids, $post->cr3ativconf_coauthors );
+            }
 
-            $meetingdate    = get_post_meta($post->ID, 'cr3ativconf_date', $single = true); 
-            $starttime      = get_post_meta($post->ID, 'cr3ativconf_starttime', $single = true);
-            $endtime        = get_post_meta($post->ID, 'cr3ativconf_endtime', $single = true); 
+            
+            $comm_time   = $starttime;
+            if ($endtime != ('')) { 
+                $comm_time .= " - $endtime"; 
+            }
 
-            $is_same_date = ($sessiondate == $meetingdate);
+            $is_same_day   = ($session_date == $meetingdate);
+            $session_date  = $meetingdate;
 
+            // -------------------------------------------------------------------------------
             // pour chaque communication, récupère les catégories (sessions, journées, pauses)
-            $terms = wp_get_post_terms($post->ID, 'cr3ativconfcategory', array('fields'=>'all'));
+            // -------------------------------------------------------------------------------
+            $is_break_or_no_desc = false;
+
+            $terms = wp_get_post_terms(
+                        $post->ID, 
+                        'cr3ativconfcategory', 
+                        array('fields'=>'all')
+                        );
+
             foreach($terms as $term) {
 
-                // s'il s'agit d'une journée, d'une pause ou d'une communication sans description
-                // (ex "introduction"), on enregistre l'état
-                if (!$term->parent) {
+                // s'il s'agit d'une journée
+                if (!$is_same_day && stristr($term->slug, "day")) {
+                    $day_name = $term->name;
+                    $day_desc = $term->description;
+                    $day_css_class = $term->slug;
+                }
 
-                    $has_desc = ($term->slug != "no-desc");
-                    $is_break = ($term->slug == "break");
-                    if ($has_desc && !$is_break) {
-                        $day_name = $term->name;
-                        $day_desc = $term->description;
+                // s'il s'agit d'une session
+                if (stristr($term->slug, "session") && !empty($term->name)) {
+                    $is_same_session = ($session_name == $term->name);
+
+                    if (!$is_same_session) {
+                        $session_name = $term->name;
+                        $session_desc = $term->description;
                     }
                 }
-                // sinon, il s'agit d'une véritable "communication"
-                else {
-                    $is_same_session = ($session_name == $term->name);
-                    $session_name = $term->name;
-                    $session_desc = $term->description;
-                }
-            }
 
+                // s'il s'agit d'une pause ou d'une communication
+                // sans description (ex: introduction, accueil
+                // des participants)
+                if ($term->slug == "no-desc" ||
+                    $term->slug == "break") {
+                    $is_break_or_no_desc = true;
+                }
+            } // fin du foreach terms
+
+            // -------------------------------------------------------------------------------
+            // Récupère la liste des personnes (intervenants et co-auteurs)
+            // -------------------------------------------------------------------------------
+            $html_list_pers     = '';
+
+            if ( is_array($person_ids) ) { 
+                
+                $array_persons = array();
+                foreach ( $person_ids as $person_id ) {
+
+                    $post_pers   = get_post_meta( $person_id ); 
+                    $html_pers  = "<strong>{$post_pers["speakerfirstname"][0]}";
+                    $html_pers .= " ".strtoupper($post_pers["speakerlastname"][0])."</strong>";
+    
+                    if (isset($post_pers["speakeradditionnal"])) {
+                        $html_pers .= " <em>(".__($post_pers["speakeradditionnal"][0]).")</em>";
+                    }
+
+                    array_push( $array_persons, $html_pers );
+                
+                }
+                $html_list_pers = implode(", ", $array_persons);
+            }  // fin du if is_array (persons_ids)
+
+/*------------------------------------------
+AFFICHAGE HTML
+------------------------------------------*/
         ?>
 
-        <div class="portfolio-info" >
-        
-        <?php if (!$is_same_date){ ?>
-            
-            <!-- Start of conference day and description -->
-            <h3 class="conf-section conf-centered"><?php echo $day_name; ?></h3>
-            <h6 class="conf-location conf-centered"><?php _e( $day_desc ); ?></h6>
-            <!-- End of conference day and description -->
-
-            
-        <?php } ?>
-
-        <?php if (!$is_same_session){ ?>
-            
-            <div class="conf-session">
-            <h5 class="conf-section conf-centered OLD_conference_date"><?php echo $session_name; ?></h5>
-            <!-- Start of conference description -->
-            <h6 class="conf-location conf-centered OLD_conference-location">
-                <?php _e( $session_desc ); ?> 
-            </h6><!-- End of conference description -->
-            </div>
-            
-            <?php } ?>
-
-            <h6 class="OLD_meeting_date">
-
-            <!-- Start of conference time -->
-            <span class="conf-time">
+        <div>
+     
             <?php 
-                if ($starttime != ('')) {  
-                    print($starttime); 
-                }
-            
-                if ($endtime != ('')) { 
-                    print(" - $endtime"); 
-                }
+                // JOURNEE
+                if (!$is_same_day) { 
             ?>
-            </span><!-- End of conference time -->
-            <span class="conf-title">
-        <?php
-            if ($has_desc && !$is_break) {
-        ?>                
-            <a href="#" title="<?php _e( '[:fr]Afficher [:en]Display [:i]', 'squarecode' ); ?>&nbsp; <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-        <?php
-            }
-            else {
-                the_title();
-            }
-        ?>                
-            </span>
-            </h6>
 
-            <?php $sessiondate = $meetingdate; ?>
-
-            <!-- Start of speaker list -->
-            <div>
-            <?php
- /* 
-            print("postid = $post_id"); 
-            $temp = $wp_query; 
-            $wp_query = null; 
-            $wp_query = new WP_Query(); 
-            $args = array(
-                'post_type'=>'cr3ativspeaker',
-                'meta_query'=>array(
-                    'relation' => 'AND',
-                    array(
-                        'key'=>'speakerisconf',
-                        'value'=>'1',
-                        'compare'=>'='
-                        )
-                    ),
-                'meta_key'=>'speakerlastname',
-                'orderby'=>'meta_value',
-                'order'=>'ASC',
-                'posts_per_page'=>-1
-            );
-            $wp_query->query($args); 
-            while ($wp_query->have_posts()) {
-                $wp_query->the_post();
-
-                if ($post_id == $post->ID) {
-                    $lastname = get_post_meta($post->ID, 'speakerlastname', $single = true);
-                    $firstname = get_post_meta($post->ID, 'speakerfirstname', $single = true);   
-                    $infos = get_post_meta($post->ID, 'speakeradditionnal', $single = true);   
-                    
-                    // speakerul : contrairement à ce que le nom indique, il peut y en avoir plusieurs séparés par un ";"
-                    $speakerurl = get_post_meta($post->ID, 'speakerurl', $single = true);   
+                <div class="wcs-day">
+               
+                    <!-- titre journée -->
+                    <h4 class="<?php echo $day_css_class; ?>"><?php echo $day_name; ?></h4>
          
-                    $speakerurl_array = array();
-                    if ($speakerurl != ('')){
-                       $speakerurl_array = explode(";", $speakerurl);
-                    }
-                    print('<div>');
-                    print("<strong>".strtoupper($lastname)." $firstname</strong>");
-                    print("<br /><em>$infos</em>");
-                    print("</div>");
+                    <!-- lieu -->
+                    <h6 class="<?php echo $day_css_class; ?>"><?php echo __($day_desc); ?></h6>
+
+               </div>
+               
+            <?php 
                 }
-            }
-            $wp_query = null; 
-            $wp_query = $temp;  
-*/                      
-
-
-            $cr3ativ_confspeakers = get_post_meta($post->ID, 'cr3ativconf_persons', $single = true); 
-	        if ( is_array($cr3ativ_confspeakers) ) { 
-				
-	        	foreach ( $cr3ativ_confspeakers as $cr3ativ_confspeaker ) {
-
-	        		$speaker    = get_post( $cr3ativ_confspeaker );
-                    $isconf   = get_post_meta( $speaker->ID, 'speakerisconf', $single = true ); 
-                    if ($isconf=='1') {
-                        $lastname   = get_post_meta( $speaker->ID, 'speakerlastname', $single = true ); 
-                        $firstname  = get_post_meta( $speaker->ID, 'speakerfirstname', $single = true ); 
-                        $infos   = get_post_meta( $speaker->ID, 'speakeradditionnal', $single = true ); 
-
-                        print('<div>');
-                        print("<strong>".strtoupper($lastname)." $firstname</strong>");
-                        print("<br /><em>$infos</em>");
-                        print("</div>");
-                    }
-				}
-                foreach ( $cr3ativ_confspeakers as $cr3ativ_confspeaker ) {
-
-                    $speaker    = get_post( $cr3ativ_confspeaker );
-                    $isconf   = get_post_meta( $speaker->ID, 'speakerisconf', $single = true ); 
-                    if ($isconf!='1') {
-                        $lastname   = get_post_meta( $speaker->ID, 'speakerlastname', $single = true ); 
-                        $firstname  = get_post_meta( $speaker->ID, 'speakerfirstname', $single = true ); 
-                        $infos   = get_post_meta( $speaker->ID, 'speakeradditionnal', $single = true ); 
-
-                        print('<div>');
-                        print("<strong>".strtoupper($lastname)." $firstname</strong>");
-                        print("<br /><em>$infos</em>");
-                        print("</div>");
-                    }
-                }
-				
-			} 
-            
+                
+                // SESSIONS
+                if (!$is_same_session){ 
             ?>
-            </div><!-- End of speaker list -->
+                <div class='wcs-session <?php echo $day_css_class; ?>'>
 
+                    <!-- libellé session -->
+                    <h5><?php echo $session_name; ?></h5>
+         
+                    <!-- description session -->
+                    <h6><?php echo __($session_desc); ?></h6>
 
-            <!-- Start of session content -->
-            <div>
-                <p>
-                    <?php the_content(); ?>
-                    
-                   <p> 
-                   <?php
-                   /*
-                   <a class="conference-more" href="<?php the_permalink (); ?>"><?php _e( '[:fr]En savoir plus...[:en]See more...[:]', 'cr3at_conf' ); ?></a>
-                   */
-                   ?>
-                   </p>
-                </p><!-- End of session content -->
-            </div>
+                </div>
+            <?php
+                } 
+            ?>
+
+                <!-- COMMUNICATION -->
+                <div class="wcs-comm <?php echo $day_css_class; ?>">
+                    <h6>
+
+                        <!-- heure -->
+                        <span class='wcs-hours <?php echo $day_css_class; ?>'><?php echo $comm_time; ?></span>
+
+                        <!-- titre pause ou autre non communication -->
+                        <span class='wcs-comm-title'>
+
+                        <?php 
+                            // titre pause ou autre non communication
+                            if ($is_break_or_no_desc) {
+                                the_title();
+                            }
+                            else {
+
+                            // titre communication
+                        ?>
+<?php
+/*
+                        <button  title="<?php _e( '[:fr]Afficher [:en]Display [:i]', 'squarecode' );  the_title_attribute();?>"
+                            class="wcs-bt-open <?php echo $day_css_class; ?>"> <?php 
+                            the_title(); ?></button>                        
+*/
+                        
+?>                        
+                            <div class="wcs-modal">                  
+
+                                <!-- titre communication -->
+                                <button  title="<?php _e( '[:fr]Afficher [:en]Display [:i]', 'squarecode' );  the_title_attribute();?>"
+                                    class="wcs-bt-open <?php echo $day_css_class; ?>">
+                                    <?php the_title(); ?>
+                                </button>
+
+                                <div class="wcs-content" style="display:none">
+                                    <div class="wcs-content-text">
+                                        <h4><?php the_title(); ?></h4>
+                                        <p><?php the_content(); ?></p> 
+                                           
+                                        <button class="wcs-bt-close">
+                                        <?php _e( '[:fr]Fermer[:en]Close[:]', 'cr3at_conf' ); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                            }
+                        ?>
+                        </span>             
+
+                    </h6>
+                </div>
+
+                <!-- DEBUT INTERVENANTS -->
+                <div class="wcs-pers">
+                <?php echo $html_list_pers; ?>
+                </div><!-- End of speaker list -->
+
         </div>
         <?php endwhile; ?>
 
-    </div><!-- End of content wrapper -->
+    </div>
 
-    <!-- Clear Fix --><div class="cr3ativconference_clear"></div>
+    <div class="cr3ativconference_clear"></div>
 
 </div><!-- End of content wrapper -->
 

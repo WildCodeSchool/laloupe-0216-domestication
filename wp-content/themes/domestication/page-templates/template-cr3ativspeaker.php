@@ -6,11 +6,10 @@ Template Name: Cr3ativSpeaker
 
 <?php get_header(); ?>
 
-    <!-- Start of content wrapper -->
-    <div id="cr3ativconference_contentwrapper">
+<div id="cr3ativconference_contentwrapper">
+    <div class="wcs-conf"> <!--class="conf-wrapper">-->
 
-        <!-- Start of content wrapper -->
-        <div class="cr3ativconference_content_wrapper">
+        <h1><?php _e("[:fr]Intervenants[:en]Speakers[:]");?></h1>
 
             <div class="cr3ativconference_clearbig"></div>
 
@@ -53,7 +52,7 @@ Template Name: Cr3ativSpeaker
             ?>
                         
             <!-- Start of conference wrapper -->
-            <div class="cr3ativconference_speaker_wrapper"> 
+            <div class="cr3ativconference_speaker_wrapper">
 
                  <!-- Start of speaker name -->
                 <div class="cr3ativconference_speaker_name">
