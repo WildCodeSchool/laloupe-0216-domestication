@@ -3039,7 +3039,7 @@ margin-bottom: 50px;
 
 .panel-row-style-classrowtextelong {
 
-margin-top: -100px;
+margin-top: -50px;
 
 }
 
@@ -3094,12 +3094,14 @@ margin-top: -100px;
 
 .classeposterPDF
 {
-	margin-top: -50px;	
+	margin-top: -90px;	
+	width: 300px;
+	margin-left: 50px;
 }
 
 .accroche2
 {
-	margin-top: 250px;	
+	margin-top: 100px;	
 	font-size: 24px;
 	font-weight: bold;
 	margin-left: 20px;
@@ -3117,13 +3119,19 @@ margin-top: -100px;
 
 .boutonprogramme
 {
-	margin-top: 60px;
+	margin-top: 10px;
 }
 
 .boutonprogrammeENG
 {
 	margin-top: 0px;
 }
+/*
+.viderow
+{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}*/
 
 .comite1
 {
